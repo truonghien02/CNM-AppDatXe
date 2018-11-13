@@ -11,7 +11,33 @@
 <body>
     <div class="container">
         <div class="row center">
-            
+            <form method="post" name="myForm" id="myForm">
+                <h3>NHẬP THÔNG TIN</h3>
+                <p>
+                    <h5>Tên *</h5>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Họ và Tên" style="width: 500px" />
+                </p>
+                
+                <p>
+                    <h5>Số điện thoại *</h5>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" style="width: 500px" /> 
+                </p>
+                
+                <p>
+                    <h5>Địa chỉ *</h5>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" style="width: 500px" />
+                </p>
+                
+                <p>
+                    <h5>Ghi chú</h5>
+                    <textarea rows="5" cols="68" id="note"></textarea>
+                </p>
+                
+                <p>
+                    <input type="submit" value="Submit" id="button" class="btn btn-primary"/>
+                </p> 
+                <p id="remind">(Ghi chú: có dấu * là bắt buộc phải nhập)</p>
+            </form>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
