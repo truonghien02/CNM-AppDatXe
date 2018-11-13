@@ -1,0 +1,14 @@
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+label.error{
+    color: red;
+}
+
+#remind{
+    font-size: 13px;
+    font-style: italic;
+}
