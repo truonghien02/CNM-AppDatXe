@@ -20,5 +20,18 @@ router.get('/load/', (req, res) => {
 		})
 })
 
+router.post('/reservegeocode/', (req, res) => {
+	console.log("vao resergeocode");
+	console.log(req.body);
+	clientRepo.insertGeocode(req.body)
+		.then(rows => {
+			console.log('row')
+			res.json(rows);
+		}).catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.end('View error log on console');
+		})
+})
 
 module.exports = router;
