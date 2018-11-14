@@ -1,12 +1,17 @@
   // Call Geocode
  // geocode();
 
- function locationIdentifier(address) {
-      alert(address);
+ function locationIdentifier(addr, name, phone, note) {
+
+ 	document.getElementById("ppName").innerHTML = name;
+ 	document.getElementById("ppPhone").innerHTML = phone;
+ 	document.getElementById("ppAddr").innerHTML = addr;
+ 	document.getElementById("ppNote").innerHTML = note;
+
       // Dùng axios lấy thông tin location
       axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
           params: {
-            address: address,
+            address: addr,
             key: "AIzaSyD8bQzMru84BpSm9d9pl6bNWn8U10Ru9U0"
           }
       })
@@ -50,17 +55,13 @@
             });
 
             // Output to app
-            // Hiển thị ra html 
-            var geometryOutput = `
-                <ul class="list-group" >
-                  <li id="lata" class="list-group-item"><strong>Latitude: </strong>${lat}</li> 
-                  <li id="long" class="list-group-item"><strong>Longtitude: </strong>${lng}</li> 
-                </ul>
-              `;
+			var geometryOutput = `
+              						<strong>Coords</strong>: <span id="lat">${lat}</span>, <span id="lng">${lng}</span>
+              					`;
             //Truyen tham so cho cac thuoc tinh Map cho the div chua Map
             document.getElementById('address-geometry').innerHTML = geometryOutput;
-            
-            document.getElementById('reserveGeocode').style.visibility='visible';
+
+
       })
       .catch(function(err) { // Nếu thất bại
           console.log("err")

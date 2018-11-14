@@ -2,7 +2,6 @@
 loadRequestFromApp1();
 
 function loadRequestFromApp1() {
-	document.getElementById('reserveGeocode').style.visibility='hidden';
 	axios.get('http://localhost:3000/api/locationidentifer/load/')
     .then(function(response){   	
         var source = document.getElementById("client-template").innerHTML;
@@ -17,21 +16,20 @@ function loadRequestFromApp1() {
 }
 
 function insertGeocode() {
-    console.log("insertGeo")
     var lat = document.getElementById("lat").innerHTML;
-        var lng = document.getElementById("lng").innerHTML;
-        var name = document.getElementById("name").innerHTML;
-        var phone = document.getElementById("phone").innerHTML;
-        var address = document.getElementById("address").innerHTML;
+    var lng = document.getElementById("lng").innerHTML;
+    var name = document.getElementById("ppName").innerHTML;
+    var phone = document.getElementById("ppPhone").innerHTML;
+    var address = document.getElementById("ppAddr").innerHTML;
 
-        var clientinfo = {};
-        clientinfo.name = name;
-        clientinfo.phone= phone;
-        clientinfo.address = address;
-        clientinfo.latitude = lat;
-        clientinfo.longtitude = lng;
+    var clientinfo = {};
+    clientinfo.name = name;
+    clientinfo.phone= phone;
+    clientinfo.address = address;
+    clientinfo.latitude = lat;
+    clientinfo.longtitude = lng;
 
-        console.log(clientinfo)
+    console.log(clientinfo)
 
     axios({
           method: 'POST',
@@ -41,7 +39,7 @@ function insertGeocode() {
     })
     .then(function(response) {
         console.log("thong tin response")
-        console.log(response);
+        alert("Reverse Geocode vị trí thành công")
 
     })
     .catch(function(err){
