@@ -1,121 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <title>LOCATION INDENTIFIER</title>
-      <meta name="viewport" content="initial-scale=1.0">
-      <meta charset="utf-8">
-      <link rel="stylesheet" type="text/css" href="main.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8bQzMru84BpSm9d9pl6bNWn8U10Ru9U0&&sensor=false"
-              async defer></script> 
 
-  </head>
+<head>
+    <title>LOCATION INDENTIFIER</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8bQzMru84BpSm9d9pl6bNWn8U10Ru9U0&&sensor=false" async defer></script>
+</head>
 
-  <body>
-    <div class="container">  
-      <h1>Danh sách Request</h1>
-
+<body>
+    <div class="container">
+        <h1>Danh sách Request</h1>
     </div>
-
     <br>
     <br>
     <br>
-   
-      <div class="row">
+    <div class="row">
         <div class="col-sm-12 col-md-12">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Note</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody id="clients">
-
-            </tbody>
-          </table>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Note</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody id="clients">
+                </tbody>
+            </table>
         </div>
-      </div>
-	
-	
-   
+    </div>
     <script id="client-template" type="text/x-handlebars-template">
-      {{#each this}}
+        {{#each this}}
         <tr>
           <td id="id">{{id}}</td>
           <td id="name">{{name}}</td>
           <td id="phone">{{phone}}</td>
           <td id="address">{{address}}</td>
-		<td id="note">{{note}}</td>
-          
+          <td id="note">{{note}}</td>
+          <td id="status" style="display:none;" >{{status}} </id>
+          <td id="latitude" style="display:none;"> {{latitude}}</td>
+          <td id="longtitude" style="display:none;"> {{longtitude}}</td>
+
           <td> 
-                <button id="geometric" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="locationIdentifier('{{address}}', '{{name}}', '{{phone}}', '{{note}}')">Xem vị trí</button>
+                <button id="geometric" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="locationIdentifier('{{address}}', '{{name}}', '{{phone}}', '{{note}}')"> {{statusClient}} </button>
           </td>
-        </tr>
-        <tr>
-            
-        </tr>
-        
       {{/each}}
     </script>
-
-	<!------------------------------------------------------------------->
-	<!-------------------- SHOW MAP LOCATION INDENTIFIER ---------------->
-
-	<div id="myModal"  class="modal fade" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">Định vị khách</h4>
-	      </div>
-	      <div class="modal-body">
-	        <div> Thông tin request </div>
-	        <div>
-				<table>
-			        <tr><strong class="col-md-3">Name: </strong> <span id="ppName" class="col-md-9"></span></tr>
-			        <tr><strong class="col-md-3">Phone: </strong> <span id="ppPhone" class="col-md-9"></span></tr>
-			        <tr><strong class="col-md-3">Address: </strong> <span id="ppAddr" class="col-md-9"></span></tr>
-			      	<tr><strong class="col-md-3">Note: </strong> <span id="ppNote" class="col-md-9"></span>
-		     	</table>
-		     	<div id="address-map">
-		        <p>Drag the cursor to change coordinates</p>
-		        <p id="address-geometry"></p>
-		    </div>
-			</div>
-			<!-- <div id="address-geometry">Hiển thị kinh độ và vĩ độ</div> -->
-			<br>
-			<br>
-			<div id="googleMap"  style="width:500px;height:380px;">Không thể hiển thị bản đồ</div>
-	      </div>
-
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button id="reserveGeocode" onclick="insertGeocode();" type="button" class="btn btn-primary">Reserve Geocoding</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-
-	<!--------------------------------------------------------------------->
-	<!----------------------------- END MAP ------------------------------->
-
+    <!------------------------------------------------------------------->
+    <!-------------------- SHOW MAP LOCATION INDENTIFIER ---------------->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Định vị khách</h4>
+                </div>
+                <div class="modal-body">
+                    <div> Thông tin request </div>
+                    <div>
+                        <table>
+                            <tr><strong class="col-md-3">Name: </strong> <span id="ppName" class="col-md-9"></span></tr>
+                            <tr><strong class="col-md-3">Phone: </strong> <span id="ppPhone" class="col-md-9"></span></tr>
+                            <tr><strong class="col-md-3">Address: </strong> <span id="ppAddr" class="col-md-9"></span></tr>
+                            <tr><strong class="col-md-3">Note: </strong> <span id="ppNote" class="col-md-9"></span>
+                        </table>
+                        <div id="address-map">
+                            <p>Drag the cursor to change coordinates</p>
+                            <p id="address-geometry"></p>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <br>
+                    <div id="googleMap" style="width:500px;height:380px;">Không thể hiển thị bản đồ</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="reserveGeocode" onclick="insertGeocode();" type="button" class="btn btn-primary">Reserve Geocoding</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--------------------------------------------------------------------->
+    <!----------------------------- END MAP ------------------------------->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-    
     <script src="./load.js"></script>
     <script src="geocode.js"></script>
-      
-   
+</body>
 
-  </body>
 </html>

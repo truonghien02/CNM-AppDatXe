@@ -1,16 +1,32 @@
 // Call List of requests 
+//var ts=0;
 loadRequestFromApp1();
 
 function loadRequestFromApp1() {
-	axios.get('http://localhost:3000/api/locationidentifer/load/')
-    .then(function(response){   	
+    var url = 'http://localhost:3001/api/locationidentifer/load/';
+    
+	axios.get(url)
+    .then(function(response){  
+        var i;
+        
+        for (i = 0; i < response.data.length; i++) { 
+            if (response.data[i].status == 0) {
+                response.data[i].statusClient = "Chưa Định vị";
+            }
+            else {
+                response.data[i].statusClient = "Đã Định vị";
+            }
+
+            console.log(response.data[i])
+        }
+
         var source = document.getElementById("client-template").innerHTML;
         var template = Handlebars.compile(source);
         var html = template(response.data);
         $('#clients').html(html);
     })
     .catch(function(err){
-    	console.log("this is error");
+    	console.log("this is error get from frontend/load.js");
     	console.log(err);
     })
 }
@@ -39,8 +55,8 @@ function insertGeocode() {
     })
     .then(function(response) {
         console.log("thong tin response")
+        document.getElementById("geometric").innerHTML = "Đã Định Vị" ;
         alert("Reverse Geocode vị trí thành công")
-
     })
     .catch(function(err){
         console.log("post err r");
