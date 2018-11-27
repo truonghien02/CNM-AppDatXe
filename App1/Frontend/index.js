@@ -49,6 +49,12 @@ $().ready(function() {
 				contentType: 'application/json',
 				success: function (data) {
 					alert('success');
+
+					var socket = io('http://localhost:3001');
+                    var msg="have sign" 
+                    
+                    // Truyền tải tín hiệu
+                    socket.emit("app1-request-server", msg);
 				},
 				error: function () {
 					alert("error");
