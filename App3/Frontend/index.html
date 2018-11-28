@@ -26,62 +26,68 @@
                             <th>Tài xế</th>
                         </tr>
                     </thead>
-                    <tbody >
-                        <tr>
-                            <td>ID</td>
-                            <td>name</td>
-                            <td>phone</td>
-                            <td>address</td>
-                            <td>
-                                <button data-toggle="modal" data-target="#myModal" class="btn btn-primary" id="geometric" onclick="bando('{{address}}')">bản đồ</button>
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Tuyến đường ngắn nhất</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input id="start" value="108.784133400000002,106.64789738518061"/>
-                                                <input id="end" value="106,106"/>
-                                                <div id="googleMap"  style="width:500px;height:380px;"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p data-toggle="modal" data-target="#myModal">Nguyễn Văn A</p>
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Thông tin tài xế</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody id="data">
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <script id="data-template" type="text/x-handlebars-template">
+            {{#each this}}
+                <tr>
+                    <td>{{ID}}</td>
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{address}}</td>
+                    <td>
+                        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary" id="geometric" onclick="bando('{{address}}')">bản đồ</button>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Tuyến đường ngắn nhất</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                            <input id="start" value="108.784133400000002,106.64789738518061"/>
+                                            <input id="end" value="106,106"/>
+                                        <div id="googleMap"  style="width:500px;height:380px;"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p data-toggle="modal" data-target="#myModal">Nguyễn Văn A</p>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Thông tin tài xế</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {{/each}}
+        </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8bQzMru84BpSm9d9pl6bNWn8U10Ru9U0&&sensor=false" async defer></script> 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
